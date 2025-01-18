@@ -1,24 +1,15 @@
 import 'package:wallpaper_task_manager/models/task.dart';
 
-abstract class TaskState {}
+abstract class TaskState {
+  List<Task>? activeTaskList;
+}
 
 class TaskInitialState extends TaskState {}
 
-class TaskIdleListeningState extends TaskState {
-  List<Task>? activeTaskList;
-  TaskIdleListeningState(this.activeTaskList);
-}
+class TaskIdleListeningState extends TaskState {}
 
-class TaskIdleNotListeningState extends TaskState {
-  List<Task>? activeTaskList;
-}
+class TaskIdleNotListeningState extends TaskState {}
 
-class TaskSyncingState extends TaskState {
-  // List<Task> queue = [];
-
-  // TaskSyncingState(List<Task> temp) {
-  //   queue = queue + temp;
-  // }
-}
+class TaskSyncingState extends TaskState {}
 
 class TaskErrorState extends TaskState {}
