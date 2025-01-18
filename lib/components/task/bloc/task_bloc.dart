@@ -12,12 +12,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _createTask(CreateTaskEvent event, Emitter<TaskState> emit) {
-    emit(TaskSyncingState());
+    emit(TaskSyncingState(state.activeTaskList!));
     state.activeTaskList!.add(event.task);
-    emit(TaskIdleListeningState());
+    print(state.activeTaskList);
+    emit(TaskIdleListeningState(state.activeTaskList!));
   }
 
   void _loadTasks(LoadTasksEvent event, Emitter<TaskState> emit) {
-    emit(TaskIdleListeningState());
+    emit(TaskIdleListeningState(state.activeTaskList!));
   }
 }
