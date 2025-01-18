@@ -2,13 +2,18 @@ import 'package:uuid/uuid.dart';
 import 'package:wallpaper_task_manager/models/content.dart';
 
 abstract class Task {
-  final String? id;
+  late final String? id;
   String? title;
   Content? content;
-  final DateTime createdOn = DateTime.now();
-  Task({required String title}) : id = Uuid().v4();
+  String? status;
+  late final DateTime createdOn;
+  Task({required String title, this.status = 'active', required this.content}) {
+    id = Uuid().v4();
+    createdOn = DateTime.now();
+  }
 }
 
 class SimpleTask extends Task {
-  SimpleTask() : super(title: "");
+  SimpleTask(String title, Content content)
+      : super(title: title, content: content);
 }
