@@ -5,8 +5,6 @@ import 'package:wallpaper_task_manager/components/task/bloc/task_states.dart';
 import '../../../models/task.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  List<Task> activeTasks = [];
-
   TaskBloc() : super(TaskInitialState()) {
     on<LoadTasksEvent>(_loadTasks);
     on<CreateTaskEvent>(_createTask);
@@ -15,11 +13,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   void _createTask(CreateTaskEvent event, Emitter<TaskState> emit) {
     emit(TaskSyncingState());
-    activeTasks.add(event.task);
-    emit(TaskIdleListeningState(activeTasks));
+    state.activeTaskList!.add(event.task);
+    emit(TaskIdleListeningState());
   }
 
   void _loadTasks(LoadTasksEvent event, Emitter<TaskState> emit) {
-    emit(TaskIdleListeningState(activeTasks));
+    emit(TaskIdleListeningState());
   }
 }
