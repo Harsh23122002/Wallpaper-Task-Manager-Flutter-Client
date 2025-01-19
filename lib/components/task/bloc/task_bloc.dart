@@ -9,7 +9,7 @@ import '../../../models/task.dart';
 import '../../home/bloc/home_bloc.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  List<Task> activeTasks = [SimpleTask("title", Content("text"))];
+  List<Task> activeTasks = [];
   final HomeBloc homeBloc;
   TaskBloc(this.homeBloc) : super(TaskInitialState()) {
     on<LoadTasksEvent>(_loadTasks);
