@@ -8,6 +8,8 @@ import 'package:wallpaper_task_manager/components/task/task_creation_page.dart';
 
 import '../../models/task.dart';
 import '../task/bloc/task_bloc.dart';
+import 'bloc/home_bloc.dart';
+import 'bloc/home_states.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,26 +19,55 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late HomeBloc homeBloc;
+  late TaskBloc taskBloc;
   @override
   Widget build(BuildContext context) {
+    taskBloc = context.read<TaskBloc>();
+    homeBloc = context.read<HomeBloc>();
     return Scaffold(
       floatingActionButton: NewTaskButton(),
       appBar: AppBar(
         // surfaceTintColor: Colors.cyan,
-        elevation: 200,
+        // elevation: 200,
         leading: Icon(Icons.menu),
       ),
-      body: SafeArea(child: Center(
-        child: BlocBuilder<TaskBloc, TaskState>(builder: (ctx, state) {
-          log("$state");
-          if (state is TaskIdleListeningState) {
-            return Text(state.activeTaskList!.length.toString());
-          } else {
-            return Text("ERROR");
-          }
-        }),
-      )),
+      body: SafeArea(
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (ctx, state) {
+            return ListView.builder(
+                itemCount: homeBloc.activeTasks.length,
+                itemBuilder: (ctx, i) {
+                  return TaskCard(
+                    title: homeBloc.activeTasks[i].title.toString(),
+                  );
+                });
+          },
+        ),
+      ),
     );
+  }
+}
+
+class TaskCard extends StatelessWidget {
+  const TaskCard({
+    required this.title,
+    super.key,
+  });
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 60,
+        child: Card(
+            color: Theme.of(context).colorScheme.primary.withAlpha(40),
+            elevation: 0,
+            child: Center(
+              child: ListTile(
+                title: Text(title),
+                trailing: Icon(Icons.do_disturb_on_outlined),
+              ),
+            )));
   }
 }
 

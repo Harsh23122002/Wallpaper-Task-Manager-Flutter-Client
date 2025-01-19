@@ -7,7 +7,7 @@ abstract class Task {
   Content? content;
   String? status;
   late final DateTime createdOn;
-  Task({required String title, this.status = 'active', required this.content}) {
+  Task({required this.title, this.status = 'active', required this.content}) {
     id = Uuid().v4();
     createdOn = DateTime.now();
   }
