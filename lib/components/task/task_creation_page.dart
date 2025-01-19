@@ -49,7 +49,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
               decoration: InputDecoration(
                 hintText: 'Title...',
                 filled: true,
-                fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                fillColor: Theme.of(context).colorScheme.secondaryContainer,
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(20)),
@@ -58,7 +58,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: Container(
+            child: SizedBox(
               height: 400,
               child: TextField(
                 controller: _contentInputController,
@@ -68,7 +68,7 @@ class _TaskCreationPageState extends State<TaskCreationPage> {
                 decoration: InputDecoration(
                   hintText: 'Enter description...',
                   filled: true,
-                  fillColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                  fillColor: Theme.of(context).colorScheme.secondaryContainer,
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(20)),
